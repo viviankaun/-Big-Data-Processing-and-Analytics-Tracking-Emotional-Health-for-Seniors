@@ -1,4 +1,4 @@
-# Project Background
+# 1. Project Background
 With an aging population, the emotional health of seniors is becoming increasingly important. Unmet emotional needs can lead to depression and other mental health issues. Our goal is to utilize AI and IoT technologies to create a platform that promotes emotional well-being through story sharing and emotional monitoring.
 
 ## Photo Collection and Story Sharing
@@ -22,12 +22,12 @@ Enhance seniors' emotional well-being, reducing feelings of loneliness and sympt
 Collect and analyze emotional data, providing key insights to support future research and health interventions.
 Promote intergenerational communication and strengthen family and community bonds.
 
-# System overview
+# 2. System overview
 ![System](systemoverview.png)
 
-# Disaster Recovery and Data Analytics for Kafka and Spark
-
-## Local Data Buffering
+# 3. Disaster Recovery and Data Analytics for Kafka and Spark
+## 3.1 Disaster Recovery:
+### Local Data Buffering
 
 To implement local data buffering, you can modify the `kafka-console-producer.sh` script in the `kafka_*/bin/` directory. The script should be updated to configure the Kafka producer properties to ensure reliable message delivery and efficient compression.
 
@@ -45,23 +45,23 @@ exec $(dirname $0)/kafka-run-class.sh kafka.tools.ConsoleProducer \
   --producer-property retries=3
 ```
 
-## Data Skew
+## 3.2 Data Skew
 
 To mitigate data skew in a Kafka-based system, it's recommended to set the partition key based on user geographic location (such as region or city). This approach ensures more even data distribution across Kafka partitions, particularly in situations where customer numbers or activity levels are uneven across regions.
 
-### Why Geographic Partitioning Helps
+### 3.2.1  Why Geographic Partitioning Helps
 
 Using the user's geographic region as a partition key ensures that messages related to different regions are distributed across different partitions, avoiding situations where a particular partition becomes overloaded due to an uneven distribution of customer activity.
 
 ---
 
-# Data Analytics with Kafka and Spark
+## 3.3 Data Analytics with Kafka and Spark
 
 This document provides insights into **data analytics** using **Apache Spark** for real-time data analysis and the use of **Kafka** for streaming data. The content focuses on performing analytics on the data using SQL queries in Spark, and saving the results to **Parquet** files for efficient storage.
 
-## 1. Data Analytics with Spark
+### 3.3.1 Data Analytics with Spark
 
-### Using `spark.sql()` for Data Querying
+### 3.3.1.2 Using `spark.sql()` for Data Querying
 
 Apache Spark allows you to execute SQL queries on structured data using the `spark.sql()` method. The results of the query are typically stored in memory for the duration of the session, making it ideal for real-time analysis.
 
@@ -77,7 +77,7 @@ spark.sql("""
 """).show(n=100)
 ```
 
-### Writing Kafka Query Results to Parquet
+### 3.3.1.3 Writing Kafka Query Results to Parquet
 Once you query the data from Kafka, you may want to persist the results to Parquet files for efficient storage.
 ```python
 result_df = spark.sql("""
