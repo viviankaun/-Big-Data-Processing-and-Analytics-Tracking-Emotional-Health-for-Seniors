@@ -61,7 +61,7 @@ This document provides insights into **data analytics** using **Apache Spark** f
 
 ### 3.3.1 Data Analytics with Spark
 
-### 3.3.1.2 Using `spark.sql()` for Data Querying
+### 3.3.1.1 Using `spark.sql()` for Data Querying
 
 Apache Spark allows you to execute SQL queries on structured data using the `spark.sql()` method. The results of the query are typically stored in memory for the duration of the session, making it ideal for real-time analysis.
 
@@ -77,7 +77,7 @@ spark.sql("""
 """).show(n=100)
 ```
 
-### 3.3.1.3 Writing Kafka Query Results to Parquet
+### 3.3.1.2 Writing Kafka Query Results to Parquet
 Once you query the data from Kafka, you may want to persist the results to Parquet files for efficient storage.
 ```python
 result_df = spark.sql("""
