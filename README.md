@@ -43,6 +43,7 @@ exec $(dirname $0)/kafka-run-class.sh kafka.tools.ConsoleProducer \
   --producer-property batch.size=16384 \
   --producer-property buffer.memory=33554432 \
   --producer-property retries=3
+```
 
 ## Data Skew
 
