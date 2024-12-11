@@ -23,7 +23,7 @@ Collect and analyze emotional data, providing key insights to support future res
 Promote intergenerational communication and strengthen family and community bonds.
 
 # System overview
-![System](System_embedding.jpeg)
+![System](systemoverview.png)
 
 # Disaster Recovery and Data Analytics for Kafka and Spark
 
