@@ -55,17 +55,17 @@ Using the user's geographic region as a partition key ensures that messages rela
 
 ---
 
-## Data Analytics with Spark
+# Data Analytics with Kafka and Spark
 
-Data analytics can be performed on the streaming data stored in Kafka by using Apache Spark. Below are examples of how to query the data and write the results to Parquet files.
+This document provides insights into **data analytics** using **Apache Spark** for real-time data analysis and the use of **Kafka** for streaming data. The content focuses on performing analytics on the data using SQL queries in Spark, and saving the results to **Parquet** files for efficient storage.
 
-### Querying with `spark.sql()`
+## 1. Data Analytics with Spark
 
-In Spark, the `spark.sql()` method allows you to run SQL queries against structured data. The results of these queries are generally stored in memory for the duration of the session.
+### Using `spark.sql()` for Data Querying
 
-#### Example Query
+Apache Spark allows you to execute SQL queries on structured data using the `spark.sql()` method. The results of the query are typically stored in memory for the duration of the session, making it ideal for real-time analysis.
 
-This example demonstrates how to query for negative sentiment scores grouped by region:
+#### Example Query to Analyze Sentiment Scores
 
 ```python
 spark.sql("""
@@ -75,6 +75,23 @@ spark.sql("""
   WHERE payload.data.sentiment_score < 0 
   GROUP BY payload.data.region
 """).show(n=100)
+```
 
+### Writing Kafka Query Results to Parquet
+Once you query the data from Kafka, you may want to persist the results to Parquet files for efficient storage.
+```python
+result_df = spark.sql("""
+  SELECT payload.data.region AS region, 
+         COUNT(payload.data.sentiment_score) AS negative 
+  FROM iotmsgs_table 
+  WHERE payload.data.sentiment_score < 0 
+  GROUP BY payload.data.region
+""")
 
+# Define the output path for the Parquet file
+output_path = "path/to/output_directory"
 
+# Write the result DataFrame to Parquet format, overwriting any existing data
+result_df.write.mode("overwrite").parquet(output_path)
+
+```
